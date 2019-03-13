@@ -1,0 +1,26 @@
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.io.FileHandler;
+
+
+
+public class ScreenShot 
+{
+   public static void main(String[] args) throws Throwable
+     {
+	System.setProperty("webdriver.gecko.driver", "D:\\Selenium\\geckodriver.exe");
+	WebDriver driver= new FirefoxDriver();
+	driver.get("https://www.google.in");
+	File scn= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	//FileUtils.copyFile(scn, new File("D:\\123.jpg"));
+	FileHandler.copy(scn, new File("D:\\1234.jpg")); 
+	driver.close();
+     }
+}
+
+// image file created 1234.jpg file

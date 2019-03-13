@@ -1,0 +1,49 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+
+public class ExtentReportDemo 
+{
+	public static void main(String[] args)
+	{
+		ExtentHtmlReporter path = new ExtentHtmlReporter("D:\\ReportDemo.html");
+		ExtentReports report= new ExtentReports();
+		report.attachReporter(path);
+		ExtentTest logger= report.createTest("Title Test");
+		
+		System.setProperty("webdriver.gecko.driver", "D:\\Selenium\\geckodriver.exe");
+		WebDriver driver= new FirefoxDriver();
+		
+		logger.log(Status.INFO, "Broswer Started");
+		
+		driver.get("http://primusbank.qedgetech.com");
+		
+		logger.log(Status.INFO, "Apllication Running");
+		String title= driver.getTitle();
+		
+		if (title.equalsIgnoreCase("primus bank"))
+		{
+			//System.out.println("Pass");
+			logger.log(Status.PASS, "Title Matched");
+			
+		} else 
+		{
+			//System.out.println("Fail");
+			logger.log(Status.FAIL, "Title Mismatched");
+		}
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e)
+		{
+				e.printStackTrace();
+		}
+		logger.log(Status.WARNING, "Broswer Closed");
+		driver.close();
+		report.flush();
+		
+	}	
+}
