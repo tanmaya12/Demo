@@ -1,0 +1,35 @@
+1. first create empty    TestLog.log     file in that project folder path (any file name)
+2. write these folowing code in notpad
+3. save it in    TestBatchfile.bat   format (any file name)
+
+
+
+
+-------------------------------------------------------------------
+@Echo off
+SET LOGFILE=D:\Selenium\BatchFileCreate\TestLog.log
+call :Logit >> %LOGFILE%
+exit /b 0
+:Logit
+cd D:\Selenium\BatchFileCreate
+set projectpath=D:\Selenium\BatchFileCreate
+echo %projectpath%
+set classpath=%projectpath%\bin;%projectpath%\lib\*
+java org.testng.TestNG %projectpath%\testng.xml
+pause
+
+--------------------------------------------------------------------
+Delatils
+-----------
+D:\Selenium\BatchFileCreate\TestLog.log------------- (.log file) location
+D:\Selenium\BatchFileCreate    --------------------- project folder location
+projectpath		---------------------------- its a variable name refers project folder path
+classpath    --------------------------------------- its a constant variable name holds bin & lib folder contains
+lib------------------------------------------------- in lib  floder all required library jar file must be present 
+java org.testng.TestNG ----------------------------- TestNg class runs .xml file(give one space after TestNG)
+testng.xml------------------------------------------ its a (.xml) file created by TestNG in project it must be present in side project folder
+
+---------------
+
+in cmd prompt run
+D:\Selenium\BatchFileCreate>java -cp bin;lib/* org.testng.TestNG testng.xml
